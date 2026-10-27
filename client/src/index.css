@@ -1,0 +1,180 @@
+/* Global Custom Styles for Online Student Feedback System */
+/* Dayananda Sagar College of Engineering - Student: N VINAY (1DS25MC051) */
+
+:root {
+  --primary-color: #1e3a8a;
+  --primary-hover: #172554;
+  --secondary-color: #0284c7;
+  --accent-gold: #f59e0b;
+  --bg-light: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1 0 auto;
+}
+
+/* Navbar styling */
+.custom-navbar {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+}
+
+.navbar-brand-badge {
+  background-color: rgba(255, 255, 255, 0.15);
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* Card Styling */
+.feedback-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.feedback-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.feedback-card-header {
+  border-bottom: 1px solid var(--border-color);
+  background-color: #f1f5f9;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Star Rating Components */
+.star-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  font-size: 1.8rem;
+  color: #cbd5e1;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.star-btn:hover {
+  transform: scale(1.2);
+}
+
+.star-btn.active {
+  color: #f59e0b;
+}
+
+.star-display {
+  color: #f59e0b;
+  font-size: 1.1rem;
+}
+
+/* Stat Cards for Dashboard */
+.stat-box {
+  border-radius: 12px;
+  padding: 1.25rem;
+  color: #fff;
+  transition: transform 0.2s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-2px);
+}
+
+.stat-box-primary {
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+}
+
+.stat-box-success {
+  background: linear-gradient(135deg, #065f46, #10b981);
+}
+
+.stat-box-warning {
+  background: linear-gradient(135deg, #b45309, #f59e0b);
+}
+
+.stat-box-info {
+  background: linear-gradient(135deg, #0e7490, #06b6d4);
+}
+
+/* Student Banner / Tag */
+.student-credit-badge {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Footer */
+.custom-footer {
+  background-color: #0f172a;
+  color: #94a3b8;
+  padding: 1.5rem 0;
+  border-top: 1px solid #1e293b;
+  margin-top: auto;
+}
+
+.custom-footer a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.custom-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Modern buttons */
+.btn-primary-dsce {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  transition: all 0.2s ease;
+}
+
+.btn-primary-dsce:hover {
+  background: linear-gradient(135deg, #1e293b, #1e3a8a);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Form controls */
+.form-control:focus, .form-select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.2);
+}
+
+/* Tables */
+.table-hover tbody tr:hover {
+  background-color: rgba(59, 130, 246, 0.04);
+}

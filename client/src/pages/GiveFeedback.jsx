@@ -62,12 +62,12 @@ export default function GiveFeedback() {
     }
 
     if (!rating || rating < 1 || rating > 5) {
-      setErrorMsg('Please select a star rating from 1 to 5.');
+      setErrorMsg('Rating is mandatory. Please select a star rating from 1 to 5.');
       return;
     }
 
-    if (!comments.trim()) {
-      setErrorMsg('Please provide a constructive comment or suggestion.');
+    if (!comments.trim() || comments.trim().length < 10) {
+      setErrorMsg('Comments must be at least 10 characters in length.');
       return;
     }
 
@@ -257,10 +257,16 @@ export default function GiveFeedback() {
                       value={comments}
                       onChange={(e) => setComments(e.target.value)}
                       disabled={isAlreadySubmitted}
+                      minLength={10}
                       required
                     ></textarea>
-                    <div className="form-text text-muted">
-                      Please provide constructive feedback to help faculty improve curriculum delivery.
+                    <div className="form-text d-flex justify-content-between align-items-center">
+                      <span className={comments.trim().length > 0 && comments.trim().length < 10 ? 'text-danger fw-semibold' : 'text-muted'}>
+                        Rating is mandatory &bull; Comments must be at least 10 characters.
+                      </span>
+                      <span className="badge bg-light text-secondary border">
+                        {comments.trim().length} / 10 min chars
+                      </span>
                     </div>
                   </div>
 

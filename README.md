@@ -151,26 +151,103 @@ npm run dev
 
 ---
 
-## 6. REST API Endpoints
+## 6. Screenshots & UI Walkthrough
 
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `POST` | `/api/auth/register` | Public | Register new student account |
-| `POST` | `/api/auth/login` | Public | Login with email & password, returns JWT |
-| `GET` | `/api/auth/me` | Logged in | Get current logged in user details |
-| `GET` | `/api/courses` | Logged in | List all semester courses with faculty info |
-| `POST` | `/api/courses` | Admin | Add a new course to the curriculum |
-| `GET` | `/api/courses/faculty-list` | Logged in | Get list of faculty members for dropdown |
-| `POST` | `/api/student/courses` | Student | Enrol in / select a course |
-| `GET` | `/api/student/courses` | Student | Get enrolled courses for logged-in student |
-| `POST` | `/api/feedback` | Student | Submit 1-5 star rating & comments for course |
-| `GET` | `/api/feedback/mine` | Student | View submitted feedback history for student |
-| `GET` | `/api/admin/summary` | Faculty/Admin | Course summary table with response count and average rating |
-| `GET` | `/api/admin/feedback?courseId=` | Faculty/Admin | All feedback responses with optional course filter |
+### 6.1 Authentication & Role-Based Login (`/login`)
+- 1-Click viva demo login buttons (`Student (Vinay)`, `Faculty`, `Admin`).
+- JWT token generation and automated local storage persistence.
+
+```text
++--------------------------------------------------------------------------+
+|  DSCE Student Feedback System                       [ Login ] [ Register ]|
++--------------------------------------------------------------------------+
+|                                                                          |
+|                   Welcome Back - Dayananda Sagar MCA                     |
+|                                                                          |
+|       [ Email: student1@dsce.edu           ]                             |
+|       [ Password: ••••••••••••             ]                             |
+|       [           Sign In Button           ]                             |
+|                                                                          |
+|       Quick Demo Auto-Fill:                                              |
+|       [ 👤 Student (Vinay) ]   [ 👨‍🏫 Faculty ]   [ 🛡️ Admin ]             |
+|                                                                          |
++--------------------------------------------------------------------------+
+```
+
+### 6.2 Student Course Selection (`/student/select-courses`)
+- Grid display of active semester MCA courses with faculty names.
+- Instant 1-click enrolment with duplicate prevention.
+
+```text
++--------------------------------------------------------------------------+
+| Select Your Semester Courses                                             |
+| Enrol in courses to provide end-term faculty & curriculum evaluations.  |
+|                                                                          |
+|  +---------------------------+     +---------------------------+         |
+|  | MMCA301 - Cloud Computing |     | MMCA302 - Full Stack Web  |         |
+|  | Faculty: Dr. K. S. Sharma |     | Faculty: Dr. K. S. Sharma |         |
+|  | Credits: 4 | Semester: 3  |     | Credits: 4 | Semester: 3  |         |
+|  | [ Enrol in Course ]       |     | [ ✓ Enrolled ]            |         |
+|  +---------------------------+     +---------------------------+         |
++--------------------------------------------------------------------------+
+```
+
+### 6.3 Interactive Feedback Submission Form (`/student/feedback`)
+- Dynamic course dropdown filtered by enrolled courses.
+- 1-5 star interactive rating with real-time feedback indicator.
+- Minimum 10 characters comment validation with live character counter.
+
+```text
++--------------------------------------------------------------------------+
+| Course & Faculty Feedback Form                                           |
++--------------------------------------------------------------------------+
+|  1. Select Enrolled Course:                                              |
+|     [ MMCA302 - Full Stack Web Development (Dr. K. S. Sharma)    ▼ ]     |
+|                                                                          |
+|  2. Course & Faculty Rating (1 - 5 Stars) *                              |
+|     ★ ★ ★ ★ ★   (5.0 - Excellent Teaching & Practical Labs)              |
+|                                                                          |
+|  3. Detailed Feedback & Comments *                                       |
+|     +----------------------------------------------------------------+   |
+|     | The hands-on labs and real-world project assignments helped us |   |
+|     | understand full-stack architecture and git workflows deeply.   |   |
+|     +----------------------------------------------------------------+   |
+|     Rating is mandatory • Comments must be at least 10 chars.  [ 124 chars ]
+|                                                                          |
+|     [ Submit Feedback ]                                                  |
++--------------------------------------------------------------------------+
+```
+
+### 6.4 Student Feedback History (`/student/my-feedback`)
+- Complete submission history with timestamp, star rating badge, and review comments.
+
+### 6.5 Admin & Faculty Analytics Dashboard (`/admin/dashboard`)
+- KPI summary metric cards (Total Courses, Total Feedback, Average Rating, Response Rate).
+- Course Summary Table with average rating calculations.
+- Detailed feedback submissions list with dynamic course dropdown filter.
 
 ---
 
-## 7. Default Demo Login Credentials
+## 7. REST API Endpoints & Specification
+
+| Method | Endpoint | Access | Request Body / Query Params | Description |
+|---|---|---|---|---|
+| `POST` | `/api/auth/register` | Public | `{ name, email, password, role, semester }` | Register student or faculty |
+| `POST` | `/api/auth/login` | Public | `{ email, password }` | Authenticate user & return JWT token |
+| `GET` | `/api/auth/me` | Bearer Token | Headers: `Authorization: Bearer <token>` | Fetch logged-in user profile |
+| `GET` | `/api/courses` | Bearer Token | None | List all MCA semester courses |
+| `POST` | `/api/courses` | Admin | `{ code, title, description, credits, semester, faculty_id }` | Add new course |
+| `GET` | `/api/courses/faculty-list` | Bearer Token | None | Dropdown list of faculty members |
+| `POST` | `/api/student/courses` | Student | `{ course_id }` | Enrol student in course |
+| `GET` | `/api/student/courses` | Student | None | Get courses enrolled by student |
+| `POST` | `/api/feedback` | Student | `{ course_id, rating, comments }` | Submit feedback (rating mandatory, comments >= 10 chars) |
+| `GET` | `/api/feedback/mine` | Student | None | View student's own submissions |
+| `GET` | `/api/admin/summary` | Faculty/Admin | None | KPI metrics & course ratings summary |
+| `GET` | `/api/admin/feedback` | Faculty/Admin | Optional query: `?courseId=1` | Granular feedback list with course filter |
+
+---
+
+## 8. Default Demo Login Credentials
 
 The application is seeded with demo accounts for immediate testing:
 
@@ -183,3 +260,4 @@ The application is seeded with demo accounts for immediate testing:
 | **Student 3** | Pooja Hegde | `student3@dsce.edu` | `Student@123` |
 
 > **Viva Tip:** On the Login page (`http://localhost:5173/login`), click the quick buttons (`👤 Student (Vinay)`, `👨‍🏫 Faculty`, `🛡️ Admin`) to autofill and test each role without typing!
+
